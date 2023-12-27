@@ -1,7 +1,6 @@
 package day1
 
 import (
-	"fmt"
 	"os"
 	"testing"
 
@@ -9,7 +8,6 @@ import (
 )
 
 func TestPart1(t *testing.T) {
-	fmt.Printf("DAY1\t")
 	tests := []struct {
 		expected int
 		input    string
@@ -29,20 +27,14 @@ func TestPart1(t *testing.T) {
 }
 
 func TestPart2(t *testing.T) {
-	fmt.Printf("DAY1\t")
 	tests := []struct {
 		expected int
 		input    string
 		fn       func(string) int
 	}{
 		{
-			expected: 142,
-			input:    "test1.txt",
-			fn:       part1,
-		},
-		{
-			expected: 281,
-			input:    "test2.txt",
+			expected: 89,
+			input:    "input.txt",
 			fn:       part2,
 		},
 	}

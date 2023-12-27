@@ -21,12 +21,11 @@ var Cmd = &cobra.Command{
 }
 
 func execute(parent, command string) {
-	b, err := os.ReadFile(fmt.Sprintf("cmd/year%s/%s/test2.txt", parent, command))
+	b, err := os.ReadFile(fmt.Sprintf("cmd/year%s/%s/input.txt", parent, command))
 	if err != nil {
 		logrus.Fatal(err)
 	}
-	logrus.Infof("Score: %d", part1(string(b)))
-	logrus.Infof("Score: %d", part2(string(b)))
+	logrus.Infof("Part2: Score: %d", part2(string(b)))
 }
 
 func getNumber(line string) int64 {
@@ -59,33 +58,34 @@ func part1(input string) int {
 	return total
 }
 
-var numTokens = map[string]rune{
-	"one":   '1',
-	"two":   '2',
-	"three": '3',
-	"four":  '4',
-	"five":  '5',
-	"six":   '6',
-	"seven": '7',
-	"eight": '8',
-	"nine":  '9',
+var numTokens = []string{
+	"zero",
+	"one",
+	"two",
+	"three",
+	"four",
+	"five",
+	"six",
+	"seven",
+	"eight",
+	"nine",
 }
 
 func parseSpelledNumber(line string) int {
 	var digits []rune
 
-	for _, ch := range line {
+	for i := 0; i < len(line); i++ {
+		ch := rune(line[i])
 		if ch >= '0' && ch <= '9' {
-			digits = append(digits, ch)
-			fmt.Println("Test: ", digits[len(digits)-1])
+			digits = append(digits, rune(ch))
 		} else {
-			for k, v := range numTokens {
-				if strings.HasPrefix(string(ch), k) {
-					fmt.Printf("ch: %v, testingFor: %v value: %v\n", ch, k, v)
-					if strings.Contains(line, k) {
-						fmt.Printf("will apend!: %v", v)
-						digits = append(digits, v)
-					}
+			for digit, word := range numTokens {
+				if len(word) > len(line[i:]) {
+					break
+				}
+				if strings.Contains(line[i:len(word)+i], word) {
+					digits = append(digits, rune(digit+'0'))
+					i += len(word) - 1
 				}
 			}
 		}
@@ -95,8 +95,8 @@ func parseSpelledNumber(line string) int {
 		return 0
 	}
 
-	n, err := strconv.Atoi(fmt.Sprintf("%v%v", digits[0], digits[len(digits)-1]))
-	fmt.Println(n)
+	n, err := strconv.Atoi(fmt.Sprintf("%c%c", digits[0], digits[len(digits)-1]))
+	fmt.Printf("%s: [%v]\n", line, n)
 	if err != nil {
 		logrus.Fatal(err)
 	}

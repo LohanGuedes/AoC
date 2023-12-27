@@ -4,7 +4,6 @@ import (
 	"os"
 
 	"github.com/lohanguedes/aoc/cmd/year2023/day1"
-	"github.com/lohanguedes/aoc/cmd/year2023/day6"
 	"github.com/spf13/cobra"
 )
 
@@ -25,5 +24,4 @@ func Execute() {
 
 func init() {
 	Cmd.AddCommand(day1.Cmd)
-	Cmd.AddCommand(day6.Cmd)
 }
