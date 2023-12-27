@@ -81,7 +81,7 @@ func parseSpelledNumber(line string) int {
 		} else {
 			for digit, word := range numTokens {
 				if len(word) > len(line[i:]) {
-					break
+					continue
 				}
 				if strings.Contains(line[i:len(word)+i], word) {
 					digits = append(digits, rune(digit+'0'))
