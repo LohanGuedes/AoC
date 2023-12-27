@@ -85,7 +85,6 @@ func parseSpelledNumber(line string) int {
 				}
 				if strings.Contains(line[i:len(word)+i], word) {
 					digits = append(digits, rune(digit+'0'))
-					i += len(word) - 1
 				}
 			}
 		}
@@ -96,10 +95,10 @@ func parseSpelledNumber(line string) int {
 	}
 
 	n, err := strconv.Atoi(fmt.Sprintf("%c%c", digits[0], digits[len(digits)-1]))
-	fmt.Printf("%s: [%v]\n", line, n)
 	if err != nil {
 		logrus.Fatal(err)
 	}
+	fmt.Printf("%s\t%d\n", line, n)
 
 	return n
 }
