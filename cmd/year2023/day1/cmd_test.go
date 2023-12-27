@@ -33,7 +33,7 @@ func TestPart2(t *testing.T) {
 		fn       func(string) int
 	}{
 		{
-			expected: 89,
+			expected: 54770,
 			input:    "input.txt",
 			fn:       part2,
 		},
